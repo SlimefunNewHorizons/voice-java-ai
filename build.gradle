@@ -1,0 +1,53 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+group = 'com.voicejavaai'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+    withSourcesJar()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            groupId = 'com.voicejavaai'
+            artifactId = 'voice-java-ai'
+            version = '1.0.0'
+
+            pom {
+                name = 'VoiceJavaAI'
+                description = 'Lightweight robotic text-to-speech synthesis engine'
+                url = 'https://github.com/Chagui68/VoiceJavaAI'
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = 'local'
+            url = uri('C:\\Users\\danie\\.m2\\repository')
+        }
+    }
+}
